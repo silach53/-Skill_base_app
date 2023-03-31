@@ -281,3 +281,8 @@ WindRose {
 .task-modal button:hover {
   background-color: #6d46b1;
 }
+
+.description-input {
+  height: 50px; /* Adjust this value according to your preferred height */
+  resize: vertical; /* Allows vertical resizing of the textarea */
+}

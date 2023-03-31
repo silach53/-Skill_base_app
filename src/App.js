@@ -19,6 +19,17 @@ function App() {
   const [labels, setLabels] = useState([]);
   const [selectedTaskIndex, setSelectedTaskIndex] = useState(-1);
 
+  const toggleTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].completed = !newTodos[index].completed;
+    setTodos(newTodos);
+  };
+
+  const deleteTodo = (index) => {
+    const newTodos = todos.filter((_, i) => i !== index);
+    setTodos(newTodos);
+  };
+
   const addProject = (projectName) => {
     setProjects([...projects, { name: projectName, tasks: [] }]);
   };
@@ -58,30 +69,30 @@ function App() {
           {}
         ),
       };
-
+  
       todos
-    .filter((todo) => todo.skill || todo.project || todo.label)
-    .forEach((todo) => {
-      // ... existing code
-
-      if (todo.project) {
-        skillMap[todo.project].taskCount++;
-        if (todo.completed) {
-          skillMap[todo.project].value += 100;
-        }
-      }
-
-      if (todo.label) {
-        skillMap[todo.label].taskCount++;
-        if (todo.completed) {
-          skillMap[todo.label].value += 100;
-        }
-      }
-    });
-
+        .filter((todo) => todo.skill || todo.project || todo.label)
+        .forEach((todo) => {
+          // ... existing code
+  
+          if (todo.project) {
+            skillMap[todo.project].taskCount++;
+            if (todo.completed) {
+              skillMap[todo.project].value += 100;
+            }
+          }
+  
+          if (todo.label) {
+            skillMap[todo.label].taskCount++;
+            if (todo.completed) {
+              skillMap[todo.label].value += 100;
+            }
+          }
+        });
+  
       const skills = Object.values(skillMap);
       //const maxValue = Math.max(...skills.map((skillData) => skillData.value));
-
+  
       const normalizedSkills = skills.map((skillData) => ({
         ...skillData,
         value:
@@ -89,27 +100,16 @@ function App() {
             ? skillData.value
             : (skillData.value * 100) / (skillData.taskCount * 100),
       }));
-
+  
       setSkillsData(normalizedSkills);
     };
-
+  
     updateSkillsData();
-  }, [todos]);
+  }, [todos, projects, labels]); // Update this line
 
   const updateTodo = (index, field, value) => {
     const newTodos = [...todos];
     newTodos[index][field] = value;
-    setTodos(newTodos);
-  };
-
-  const toggleTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos[index].completed = !newTodos[index].completed;
-    setTodos(newTodos);
-  };
-
-  const deleteTodo = (index) => {
-    const newTodos = todos.filter((_, i) => i !== index);
     setTodos(newTodos);
   };
 
@@ -133,11 +133,13 @@ function App() {
           <WindRose data={skillsData} />
         </div>
         <TaskModal
-        selectedTaskIndex={selectedTaskIndex}
-        todos={todos}
-        setSelectedTaskIndex={setSelectedTaskIndex}
-        updateTodo={updateTodo} // Add this line to pass the updateTodo function
-        />
+  selectedTaskIndex={selectedTaskIndex}
+  todos={todos}
+  setSelectedTaskIndex={setSelectedTaskIndex}
+  updateTodo={updateTodo}
+  toggleTodo={toggleTodo}
+  deleteTodo={deleteTodo}
+/>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 
-const WindRose = ({ data, priorityData, projectData, labelData }) => {
+const WindRose = ({data}) => {
   const calculateWindRoseSize = (skills) => {
     return skills.length * 120; // Increase the multiplier to make the chart bigger
   };
@@ -26,28 +26,6 @@ const WindRose = ({ data, priorityData, projectData, labelData }) => {
           dataKey="value"
           stroke="#8884d8"
           fill="#8884d8"
-          fillOpacity={0.6}
-        />
-        {/* Add additional Radar components for priority levels, projects, and labels */}
-        <Radar
-          name="Priority Levels"
-          dataKey="value"
-          stroke="#82ca9d"
-          fill="#82ca9d"
-          fillOpacity={0.6}
-        />
-        <Radar
-          name="Projects"
-          dataKey="value"
-          stroke="#ffc658"
-          fill="#ffc658"
-          fillOpacity={0.6}
-        />
-        <Radar
-          name="Labels"
-          dataKey="value"
-          stroke="#ff7300"
-          fill="#ff7300"
           fillOpacity={0.6}
         />
       </RadarChart>

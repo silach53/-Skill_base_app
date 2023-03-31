@@ -10,11 +10,23 @@ const TodoCard = ({
   labels,
   setSelectedTaskIndex,
 }) => {
+
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsOpen(false);
+  };
+
   const [dueDate, setDueDate] = useState(todo.dueDate);
   const [skill, setSkill] = useState(todo.skill);
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [description, setDescription] = useState('');
+  const [showDetails, setShowDetails] = useState(false);
+
+
 
   const handleUpdateTodo = (field, value) => {
     if (field === 'dueDate') {
@@ -25,13 +37,7 @@ const TodoCard = ({
     updateTodo(index, field, value);
   };
 
-  const handleMouseEnter = () => {
-    setIsOpen(true);
-  };
 
-  const handleMouseLeave = () => {
-    setIsOpen(false);
-  };
 
   const handleAddSubtask = (event) => {
     event.preventDefault();
@@ -49,10 +55,10 @@ const TodoCard = ({
 
   return (
     <div
-      className={`todo-card-container${todo.completed ? ' completed' : ''}`}
-  
-      onMouseLeave={handleMouseLeave}
-      onClick={() => setSelectedTaskIndex(index)}
+    className={`todo-card-container${todo.completed ? ' completed' : ''}`}
+    onMouseEnter={handleMouseEnter}
+    onMouseLeave={handleMouseLeave}
+    onClick={() => setSelectedTaskIndex(index)}  
     >
 
       <table className="todo-card">
@@ -152,6 +158,21 @@ const TodoCard = ({
           )}
         </tbody>
       </table>
+      <div
+  className={`todo-card-container${todo.completed ? ' completed' : ''}`}
+  onMouseEnter={handleMouseEnter}
+  onMouseLeave={handleMouseLeave}
+  onClick={() => setSelectedTaskIndex(index)}
+>
+  <table className="todo-card">
+    {/* ... existing table content */}
+  </table>
+  {showDetails && (
+    <div className="additional-details">
+      {/* Place additional details here */}
+    </div>
+  )}
+</div>
       {isOpen && (
         <div className="subtasks">
           <form onSubmit={handleAddSubtask}>
@@ -227,6 +248,7 @@ const TodoList = ({
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          className="description-input" // Add this line
         />
         <button type="submit">Add</button>
       </form>
