@@ -26,7 +26,7 @@
 .TodoList {
   flex: 1;
   margin-right: 20px;
-  padding: 20px; /* Added padding inside the TodoList */
+  padding: 20px;
 }
 
 .WindRose {
@@ -97,25 +97,135 @@ WindRose {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center; /* Center the WindRose container */
+  align-items: center;
 }
 
 .wind-rose-container {
-  text-align: center; /* Center the WindRose title */
-  padding: 20px; /* Add padding around the WindRose container */
+  text-align: center;
+  padding: 20px;
 }
+
 .todo-card-container.completed {
-  background-color: #e38fce; /* Change to the desired grey color */
+  background-color: #e38fce;
 }
 
 .WindRose {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center; /* Center the WindRose container */
+  align-items: center;
 }
 
 .wind-rose-container {
-  text-align: center; /* Center the WindRose title */
-  padding: 20px; /* Add padding around the WindRose container */
+  text-align: center;
+  padding: 20px;
+}
+
+/* ProjectList styles */
+.ProjectList {
+  flex: 1;
+  margin-right: 20px;
+  padding: 20px;
+}
+
+.ProjectList h2 {
+  font-size: 24px;
+}
+
+.ProjectList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ProjectList li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.ProjectList input {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.ProjectList button {
+  font-size: 14px;
+  padding: 4px 8px;
+  border: 1px solid #4f2a93;
+  background-color: #4f2a93;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.ProjectList button:hover {
+  background-color: #6d46b1;
+}
+
+/* LabelList styles */
+.LabelList {
+  flex: 1;
+  margin-right: 20px;
+  padding: 20px;
+}
+
+.LabelList h2 {
+  font-size: 24px;
+}
+
+.LabelList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.LabelList li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.LabelList input {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.LabelList button {
+  font-size: 14px;
+  padding: 4px 8px;
+  border: 1px solid #4f2a93;
+  background-color: #4f2a93;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.LabelList button:hover {
+  background-color: #6d46b1;
+}
+
+/* Subtasks styles */
+.subtasks {
+  margin-top: 8px;
+}
+
+.subtasks form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.subtasks input {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.subtasks ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.subtasks li {
+  margin-bottom: 8px;
 }

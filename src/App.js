@@ -14,6 +14,36 @@ const defaultSkills = [
 function App() {
   const [todos, setTodos] = useState([]);
   const [skillsData, setSkillsData] = useState(defaultSkills);
+  const [projects, setProjects] = useState([]);
+  const [labels, setLabels] = useState([]);
+
+  const addProject = (projectName) => {
+    setProjects([...projects, { name: projectName, tasks: [] }]);
+  };
+
+  const updateProject = (index, projectName) => {
+    const updatedProjects = [...projects];
+    updatedProjects[index].name = projectName;
+    setProjects(updatedProjects);
+  };
+
+  const deleteProject = (index) => {
+    setProjects(projects.filter((_, i) => i !== index));
+  };
+
+  const addLabel = (labelName) => {
+    setLabels([...labels, { name: labelName }]);
+  };
+
+  const updateLabel = (index, labelName) => {
+    const updatedLabels = [...labels];
+    updatedLabels[index].name = labelName;
+    setLabels(updatedLabels);
+  };
+
+  const deleteLabel = (index) => {
+    setLabels(labels.filter((_, i) => i !== index));
+  };
 
   useEffect(() => {
     const updateSkillsData = () => {
@@ -26,27 +56,30 @@ function App() {
           {}
         ),
       };
-    
+
       todos
-        .filter((todo) => todo.skill) // Filter out tasks without skills
-        .forEach((todo) => {
-          if (!skillMap[todo.skill]) {
-            skillMap[todo.skill] = {
-              skill: todo.skill,
-              value: 0,
-              taskCount: 0,
-            };
-          }
-          skillMap[todo.skill].taskCount++;
-    
-          if (todo.completed) {
-            skillMap[todo.skill].value += 100;
-          }
-        });
-    
+    .filter((todo) => todo.skill || todo.project || todo.label)
+    .forEach((todo) => {
+      // ... existing code
+
+      if (todo.project) {
+        skillMap[todo.project].taskCount++;
+        if (todo.completed) {
+          skillMap[todo.project].value += 100;
+        }
+      }
+
+      if (todo.label) {
+        skillMap[todo.label].taskCount++;
+        if (todo.completed) {
+          skillMap[todo.label].value += 100;
+        }
+      }
+    });
+
       const skills = Object.values(skillMap);
       //const maxValue = Math.max(...skills.map((skillData) => skillData.value));
-    
+
       const normalizedSkills = skills.map((skillData) => ({
         ...skillData,
         value:
@@ -54,7 +87,7 @@ function App() {
             ? skillData.value
             : (skillData.value * 100) / (skillData.taskCount * 100),
       }));
-    
+
       setSkillsData(normalizedSkills);
     };
 
@@ -89,6 +122,8 @@ function App() {
             updateTodo={updateTodo}
             toggleTodo={toggleTodo}
             deleteTodo={deleteTodo}
+            projects={projects}
+            labels={labels}
           />
         </div>
         <div className="WindRose">
