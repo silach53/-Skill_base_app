@@ -8,6 +8,7 @@ const TodoCard = ({
   index,
   projects,
   labels,
+  setSelectedTaskIndex,
 }) => {
   const [dueDate, setDueDate] = useState(todo.dueDate);
   const [skill, setSkill] = useState(todo.skill);
@@ -49,9 +50,11 @@ const TodoCard = ({
   return (
     <div
       className={`todo-card-container${todo.completed ? ' completed' : ''}`}
-      onMouseEnter={handleMouseEnter}
+  
       onMouseLeave={handleMouseLeave}
+      onClick={() => setSelectedTaskIndex(index)}
     >
+
       <table className="todo-card">
         <tbody>
           <tr>
@@ -186,6 +189,7 @@ const TodoList = ({
   deleteTodo,
   projects,
   labels,
+  setSelectedTaskIndex, // Add this line
 }) => {
   const [input, setInput] = useState('');
   const [description, setDescription] = useState('');
@@ -237,6 +241,7 @@ const TodoList = ({
               deleteTodo={deleteTodo}
               projects={projects}
               labels={labels}
+              setSelectedTaskIndex={setSelectedTaskIndex} // Add this line
             />
           </li>
         ))}

@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import TodoList from './TodoList';
 import WindRose from './WindRose';
 import './App.css';
+import TaskModal from './components/TaskModal'; // Import the TaskModal component at the top of the file
 
 const defaultSkills = [
   { skill: 'Skill 1', value: 100 },
@@ -16,6 +17,7 @@ function App() {
   const [skillsData, setSkillsData] = useState(defaultSkills);
   const [projects, setProjects] = useState([]);
   const [labels, setLabels] = useState([]);
+  const [selectedTaskIndex, setSelectedTaskIndex] = useState(-1);
 
   const addProject = (projectName) => {
     setProjects([...projects, { name: projectName, tasks: [] }]);
@@ -124,11 +126,18 @@ function App() {
             deleteTodo={deleteTodo}
             projects={projects}
             labels={labels}
+            setSelectedTaskIndex={setSelectedTaskIndex} // Add this line
           />
         </div>
         <div className="WindRose">
           <WindRose data={skillsData} />
         </div>
+        <TaskModal
+        selectedTaskIndex={selectedTaskIndex}
+        todos={todos}
+        setSelectedTaskIndex={setSelectedTaskIndex}
+        updateTodo={updateTodo} // Add this line to pass the updateTodo function
+        />
       </div>
     </div>
   );

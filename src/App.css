@@ -229,3 +229,55 @@ WindRose {
 .subtasks li {
   margin-bottom: 8px;
 }
+
+/* TaskModal styles */
+.task-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.task-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-modal form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.task-modal form input {
+  margin-top: 5px;
+}
+
+.task-modal button {
+  font-size: 14px;
+  padding: 4px 8px;
+  border: 1px solid #4f2a93;
+  background-color: #4f2a93;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+.task-modal button:hover {
+  background-color: #6d46b1;
+}
