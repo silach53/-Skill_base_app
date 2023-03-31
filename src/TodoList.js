@@ -23,57 +23,60 @@ const TodoCard = ({ todo, toggleTodo, deleteTodo, index }) => {
     };
   
     return (
-  <div
-    className="todo-card-container"
-    onMouseEnter={handleMouseEnter}
-    onMouseLeave={handleMouseLeave}
-  >
-    <table className="todo-card">
-      <tbody>
-        <tr>
-          <td className="task-text">{todo.text}</td>
-        </tr>
-        <tr>
-          <td className="description">
-            {isOpen
-              ? todo.description
-              : todo.description.slice(0, 20) + '...'}
-          </td>
-        </tr>
-        <tr>
-          <td className="due-date">
+      <div
+      className={`todo-card-container${todo.completed ? ' completed' : ''}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      >
+        <table className="todo-card">
+          <tbody>
+            <tr>
+              <td className="task-text">{todo.text}</td>
+            </tr>
+            <tr>
+            <td className="description">
+  {isOpen
+    ? todo.description
+    : todo.description.length > 20
+    ? todo.description.slice(0, 20) + '...'
+    : todo.description}
+</td>
+            </tr>
+            <tr>
+              <td className="due-date">
+                {isOpen && (
+                  <input
+                    placeholder="Due Date"
+                    value={dueDate}
+                    onChange={(e) => updateTodo('dueDate', e.target.value)}
+                  />
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="skill">
+                {isOpen && (
+                  <input
+                    placeholder="Skill"
+                    value={skill}
+                    onChange={(e) => updateTodo('skill', e.target.value)}
+                  />
+                )}
+              </td>
+            </tr>
             {isOpen && (
-              <input
-                placeholder="Due Date"
-                value={dueDate}
-                onChange={(e) => updateTodo('dueDate', e.target.value)}
-              />
+              <tr>
+                <td>
+                  <button onClick={() => toggleTodo(index)}>Toggle</button>
+                  <button onClick={() => deleteTodo(index)}>Delete</button>
+                </td>
+              </tr>
             )}
-          </td>
-        </tr>
-        <tr>
-          <td className="skill">
-            {isOpen && (
-              <input
-                placeholder="Skill"
-                value={skill}
-                onChange={(e) => updateTodo('skill', e.target.value)}
-              />
-            )}
-          </td>
-        </tr>
-        {isOpen && (
-          <tr>
-            <td>
-              <button onClick={() => toggleTodo(index)}>Toggle</button>
-              <button onClick={() => deleteTodo(index)}>Delete</button>
-            </td>
-          </tr>
-        )}
-      </tbody>
-    </table>
-  </div>
-);
+          </tbody>
+        </table>
+      </div>
+    );
+            }
 
 const TodoList = ({ todos, setTodos }) => {
   const [input, setInput] = useState('');

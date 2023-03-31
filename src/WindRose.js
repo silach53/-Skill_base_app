@@ -1,33 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 
 const WindRose = ({ data }) => {
-  const [skillsData, setSkillsData] = useState([]);
+  const calculateWindRoseSize = (skills) => {
+    return skills.length * 120; // Increase the multiplier to make the chart bigger
+  };
 
-  useEffect(() => {
-    const updateSkillsData = () => {
-      // Update the skillsData state based on the data prop (todos)
-      // You can modify this function according to your needs
-      const skills = data.map((todo) => ({
-        skill: todo.skill,
-        value: todo.completed ? 100 : 0
-      }));
-      setSkillsData(skills);
-    };
-
-    updateSkillsData();
-  }, [data]);
+  const size = calculateWindRoseSize(data);
 
   return (
-    <div>
+    <div className="wind-rose-container">
       <h2>Wind Rose</h2>
       <RadarChart
-        cx={300}
-        cy={250}
-        outerRadius={150}
-        width={600}
-        height={500}
-        data={skillsData}
+        cx={size / 2}
+        cy={size / 2}
+        outerRadius={size / 4}
+        width={size}
+        height={size}
+        data={data}
       >
         <PolarGrid />
         <PolarAngleAxis dataKey="skill" />
@@ -39,6 +29,19 @@ const WindRose = ({ data }) => {
           fillOpacity={0.6}
         />
       </RadarChart>
+      <div className="skills-count">
+        <p>Number of Skills: {data.length}</p>
+      </div>
+      <div className="skills-values">
+        <h3>Skill Values:</h3>
+        <ul>
+          {data.map((skill, index) => (
+            <li key={index}>
+              {skill.skill}: {skill.value}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

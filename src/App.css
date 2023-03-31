@@ -46,13 +46,17 @@
   margin-bottom: 8px;
 }
 
-.TodoList .todo-card {
+.todo-card {
   width: 100%;
   border-collapse: collapse;
 }
 
-.TodoList .todo-card td {
-  border: 1px solid #4f2a93;
+.todo-card tr {
+  border: none;
+}
+
+.todo-card td {
+  border: none;
   padding: 4px 8px;
   text-align: left;
   vertical-align: top;
@@ -87,4 +91,31 @@
 .todo-card-container:hover {
   cursor: pointer;
   background-color: #f5f5f5;
+}
+
+WindRose {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the WindRose container */
+}
+
+.wind-rose-container {
+  text-align: center; /* Center the WindRose title */
+  padding: 20px; /* Add padding around the WindRose container */
+}
+.todo-card-container.completed {
+  background-color: #e38fce; /* Change to the desired grey color */
+}
+
+.WindRose {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the WindRose container */
+}
+
+.wind-rose-container {
+  text-align: center; /* Center the WindRose title */
+  padding: 20px; /* Add padding around the WindRose container */
 }
